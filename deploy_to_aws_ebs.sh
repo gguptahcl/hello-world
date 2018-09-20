@@ -124,3 +124,11 @@ echo Deploy ended with success! Time elapsed: $((end-start)) seconds
 #version=$(mvn help:evaluate -Dexpression=project.version | tail -8 | head -1)
 #mvn package dockerfile:build
 #mvn package
+
+#MVN_VERSION=$(mvn -q \
+#    -Dexec.executable=echo \
+#    -Dexec.args='${project.version}' \
+#    --non-recursive \
+#    exec:exec)
+
+#echo Maven Version is ${MVN_VERSION}
