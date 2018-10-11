@@ -53,5 +53,48 @@ public class HelloController {
 	}// end catch		
   }// end method 
 
+
+/**
+	This method is only for kubernetes deployment
+**/
+
+  @RequestMapping(value="/hello/k8s/{zipcode}", method = RequestMethod.GET)
+	public String getWeatherByCallingK8SOne(@PathVariable("zipcode") String zipcode) 
+  {   
+	
+	String weatherServiceName = env.getProperty("WEATHER_SERVICE_NAME");
+	// WEATHER_SERVICE_PORT will be used only if port is other than 80
+	//String weatherServicePort = env.getProperty("WEATHER_SERVICE_PORT");
+	String url = "http://"+weatherServiceName+ "/weather/zip/"+ zipcode;
+	try {
+		RestTemplate restTemplate = new RestTemplate();
+	        String result = restTemplate.getForObject(url, String.class);
+		return result;
+	  }
+	catch (Exception e) {
+		return url ;
+	}// end catch
+  }// end method 
+
+
+  
+/*     @RequestMapping(value="/hello/k8s/{zipcode}", method = RequestMethod.GET)
+	public String getWeatherByCallingK8S(@PathVariable("zipcode") String zipcode) 
+  {   
+	
+	String weatherServiceName = env.getProperty("WEATHER_SERVICE_NAME");
+	String weatherServicePort = env.getProperty("WEATHER_SERVICE_PORT");
+	String url = "http://"+weatherServiceName+":"+ weatherServicePort+ "/weather/zip/"+ zipcode;
+	try {
+		RestTemplate restTemplate = new RestTemplate();
+	        String result = restTemplate.getForObject(url, String.class);
+		return result;
+	  }
+	catch (Exception e) {
+		return url ;
+	}// end catch
+  }// end method 
+*/
+
 }// end class
 
