@@ -17,7 +17,23 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index() {
-        return "Greetings from Spring Boot Hello World Service!";
+	/**
+	    Following code has been written to generate load on the server. 
+            Purpose of load generation was to test Auto Scaling
+	    Commented code has not been validated	
+       **/
+
+	/*long duration = 20000 ;
+	double load = 0.8;
+	for (int i=0 ; i <= 1000 ; i++){
+		int sum = 2 * 2 ;
+		
+	}*/
+	/*for (int j=0 ; j <= 10 ; j++){
+		generateLoad(load, duration);		
+	}
+	generateLoad(load, duration);	*/
+	return "Greetings from Spring Boot Hello World Service!";
     }
 
 
@@ -96,5 +112,28 @@ public class HelloController {
   }// end method 
 */
 
+
+	
+	/**
+	    Following code has been written to generate load on the server. 
+            Purpose of load generation was to test Auto Scaling
+	    Commented code has not been validated	
+       **/
+
+/*	 private void generateLoad(double load, long duration) {
+            long startTime = System.currentTimeMillis();
+            try {
+                // Loop for the given duration
+                while (System.currentTimeMillis() - startTime < duration) {
+                    // Every 100ms, sleep for the percentage of unladen time
+                    if (System.currentTimeMillis() % 100 == 0) {
+                        Thread.sleep((long) Math.floor((1 - load) * 100));
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }// end generateLoad
+*/
 }// end class
 
