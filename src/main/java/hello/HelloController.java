@@ -33,6 +33,7 @@ public class HelloController {
 		generateLoad(load, duration);		
 	}
 	generateLoad(load, duration);	*/
+    	System.out.println("bbbbbbb ");
 	return "Greetings from Spring Boot Hello World Service!";
     }
 
