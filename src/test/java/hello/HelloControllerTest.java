@@ -24,6 +24,7 @@ public class HelloControllerTest {
 
     @Test
     public void getHello() throws Exception {
+    	System.out.println("inside test case *******************" );
         mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
