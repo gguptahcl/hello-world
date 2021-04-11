@@ -25,7 +25,7 @@ pipeline {
         }
         stage("Quality gate") {
             steps {
-                waitForQualityGate (webhookSecretId: yourSecretID)  abortPipeline: false
+                waitForQualityGate  abortPipeline: false
             }
         }
         stage('Deploy') {
