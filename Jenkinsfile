@@ -16,6 +16,13 @@ pipeline {
                 recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
             }
         }
+         stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "mvn sonarqube"
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
