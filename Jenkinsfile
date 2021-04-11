@@ -19,7 +19,7 @@ pipeline {
          stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('LOCAL_SONARQUBE') {
-                    bat 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=admin1234'
+                    bat 'mvn sonar:sonar'
                 }
             }
         }
