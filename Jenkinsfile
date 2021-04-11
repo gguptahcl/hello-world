@@ -13,6 +13,7 @@ pipeline {
                 bat 'mvn package'
                 echo 'test 2....'
                 bat 'mvn checkstyle:checkstyle'
+                recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
             }
         }
         stage('Deploy') {
