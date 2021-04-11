@@ -9,8 +9,9 @@ pipeline {
         }
         stage('Test') {
             steps {
+            	echo 'test 1....'
                 bat 'mvn package'
-                echo 'Deploying....'
+                echo 'test 2....'
             }
         }
         stage('Deploy') {
