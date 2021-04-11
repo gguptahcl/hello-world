@@ -12,6 +12,7 @@ pipeline {
             	echo 'test 1....'
                 bat 'mvn package'
                 echo 'test 2....'
+                bat 'mvn checkstyle:checkstyle'
             }
         }
         stage('Deploy') {
