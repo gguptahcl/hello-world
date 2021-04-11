@@ -25,7 +25,9 @@ pipeline {
         }
         stage("Quality gate") {
             steps {
+            withSonarQubeEnv('LOCAL_SONARQUBE') {
                 waitForQualityGate  abortPipeline: false
+                }
             }
         }
         stage('Deploy') {
