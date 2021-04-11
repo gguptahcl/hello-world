@@ -20,11 +20,14 @@ pipeline {
             steps {
                 withSonarQubeEnv('LOCAL_SONARQUBE') {
                     bat 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=admin1234'
-                    recordIssues(tools: [sonar(reportEncoding: 'UTF-8')])
                 }
             }
         }
-       
+        stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: false
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
