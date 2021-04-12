@@ -5,7 +5,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                bat 'docker info' 
+                
+                 
             }
         }
         stage('Test') {
@@ -32,6 +33,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                bat 'docker info'
+                
+               bat  'docker build -t jenkins-demo:${BUILD_NUMBER} .' 
+    		   bat 'docker tag jenkins-demo:${BUILD_NUMBER} jenkins-demo:latest'
+			   bat 'docker images'
             }
         }
     }
