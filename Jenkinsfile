@@ -36,7 +36,7 @@ pipeline {
                 echo 'Deploying....'
                 bat 'docker info'
                 echo "The build number is ${env.BUILD_NUMBER}"
-                bat  'docker build -t jenkins-demo .' 
+                bat  "docker build -t jenkins-demo:${VERSION} ." 
     		    bat "docker tag jenkins-demo:${VERSION} jenkins-demo:latest"
 			    bat 'docker images'
             }

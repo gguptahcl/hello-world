@@ -1,13 +1,14 @@
 pipeline {
     agent any
 
+	environment { 
+	   VERSION = "${env.BUILD_NUMBER}"
+	}
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                
-                 
-            }
+                }
         }
         stage('Test') {
             steps {
@@ -34,10 +35,10 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 bat 'docker info'
-                
-                bat  'docker build -t jenkins-demo:1 .' 
-    		   bat 'docker tag jenkins-demo:1 jenkins-demo:latest'
-			   bat 'docker images'
+                echo "The build number is ${env.BUILD_NUMBER}"
+                bat  'docker build -t jenkins-demo .' 
+    		    bat "docker tag jenkins-demo:${VERSION} jenkins-demo:latest"
+			    bat 'docker images'
             }
         }
     }
