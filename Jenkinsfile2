@@ -34,9 +34,9 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 bat 'docker info'
-                echo "The build number is ${env.BUILD_NUMBER}"
+                
                 bat  'docker build -t jenkins-demo:1 .' 
-    		   bat 'docker tag jenkins-demo:${env.BUILD_NUMBER} jenkins-demo:latest'
+    		   bat 'docker tag jenkins-demo:1 jenkins-demo:latest'
 			   bat 'docker images'
             }
         }
