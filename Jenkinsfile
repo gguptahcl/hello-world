@@ -35,8 +35,8 @@ pipeline {
                 echo 'Deploying....'
                 bat 'docker info'
                 
-               bat  'docker build -t jenkins-demo:${BUILD_NUMBER} .' 
-    		   bat 'docker tag jenkins-demo:${BUILD_NUMBER} jenkins-demo:latest'
+                bat  'docker build -t jenkins-demo:1 .' 
+    		   bat 'docker tag jenkins-demo:1 jenkins-demo:latest'
 			   bat 'docker images'
             }
         }
