@@ -33,7 +33,7 @@ public class HelloController {
 		 * generateLoad(load, duration);
 		 */
 		System.out.println("bbbbbbb ");
-		return "Greetings from Spring Boot Hello World Service!";
+		return "Greetings from Spring Boot Hello World Service! from build number 59";
 	}
 
 	@RequestMapping(value = "/hello/zip/{zipcode}", method = RequestMethod.GET)
