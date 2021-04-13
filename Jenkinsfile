@@ -3,6 +3,9 @@ pipeline {
 
 	environment { 
 	   VERSION = "${env.BUILD_NUMBER}"
+	   registry = "ggupta0109/hello-world-docker" 
+       registryCredential = 'ggupta0109' 
+       dockerImage = '' 
 	}
     stages {
         stage('Build') {
@@ -37,9 +40,29 @@ pipeline {
                 bat 'docker info'
                 echo "The build number is ${env.BUILD_NUMBER}"
                 bat  "docker build -t jenkins-demo:${VERSION} ." 
+                
+                def customImage = docker.build("my-image:${env.BUILD_ID}")
+                 
     		    bat "docker tag jenkins-demo:${VERSION} jenkins-demo:latest"
 			    bat 'docker images'
             }
         }
+        stage('Building our image') { 
+		steps { 
+                script { 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                }
+            } 
+        }
+        stage('Deploy our image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
+        } 
+   
     }
 }
