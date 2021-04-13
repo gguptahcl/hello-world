@@ -7,7 +7,7 @@
     <artifactId>hello-world-docker</artifactId>
     <version>0.1.0</version>
     <packaging>jar</packaging>
-    <name>Hello World Docker</name>
+    <name>Hello World -- Docker</name>
     <description>Hello World with Spring Boot and Docker</description>
 
     <parent>
