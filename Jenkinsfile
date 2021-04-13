@@ -11,7 +11,8 @@ pipeline {
 		Install maven 
 		SonarQube Scanner plugin for Jenkins
 		Install docker Pipeline Plugin 
-
+		SonarQube credentials set up in Jenkins  ,LOCAL_SONARQUBE  - is the name of Local Sonar Server in Jenkins                 
+		DockerHub credentials set up in Jenkins (under global credentials)and used that ID as 'registryCredential' 
 	*/
 	environment { 
 	   VERSION = "${env.BUILD_NUMBER}"
@@ -31,7 +32,6 @@ pipeline {
         }
          stage('SonarQube analysis') {
             steps {
-                //  LOCAL_SONARQUBE  - is the name of Local Sonar Server in Jenkins 
                 withSonarQubeEnv('LOCAL_SONARQUBE') {
                    // bat 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=admin1234'
                    bat 'mvn sonar:sonar'
@@ -59,6 +59,8 @@ pipeline {
 		steps { 
                 script { 
                     dockerImage = docker.build registry + ":${VERSION}" 
+                    
+                    echo "dockerImage is " + ${dockerImage}
                 }
             } 
         }
