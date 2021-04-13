@@ -60,7 +60,7 @@ pipeline {
                 script { 
                     dockerImage = docker.build registry + ":${VERSION}" 
                     
-                    echo "dockerImage is " + ${dockerImage}
+                    echo "dockerImage is " + dockerImage
                 }
             } 
         }
