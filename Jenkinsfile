@@ -4,7 +4,7 @@ pipeline {
 	environment { 
 	   VERSION = "${env.BUILD_NUMBER}"
 	   registry = "ggupta0109/hello-world-docker" 
-       registryCredential = 'ggupta0109' 
+       registryCredential = 'Newpass10' 
        dockerImage = '' 
 	}
     stages {
