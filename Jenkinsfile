@@ -38,6 +38,7 @@ pipeline {
                 }
             }
         }
+        
         stage("Quality gate") {
             steps {
                 // for this to work had to Server authentication token SonarQube servers (under configuration)
