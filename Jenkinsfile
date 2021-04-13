@@ -1,6 +1,18 @@
 pipeline {
     agent any
 
+	/*
+		Set ENV Variables
+		Run mvn package
+		checkstyle scan and report generation
+		SonarQube Analysis
+		Install Jenkins WAR , .msi did not work due to user account issues
+		Install GIT on laptop , add GIT.exe path in Global Tools configuration   (https://www.guru99.com/jenkins-github-integration.html)
+		Install maven 
+		SonarQube Scanner plugin for Jenkins
+		Install docker Pipeline Plugin 
+
+	*/
 	environment { 
 	   VERSION = "${env.BUILD_NUMBER}"
 	   registry = "ggupta0109/hello-world-docker" 
@@ -9,11 +21,6 @@ pipeline {
 	}
     stages {
         stage('Build') {
-            steps {
-                echo 'Building..'
-                }
-        }
-        stage('Test') {
             steps {
             	echo 'test 1....'
                 bat 'mvn package'
@@ -31,10 +38,11 @@ pipeline {
         }
         stage("Quality gate") {
             steps {
+                // for this to work had to Server authentication token SonarQube servers (under configuration)
                 waitForQualityGate  abortPipeline: false
             }
         }
-        stage('Deploy') {
+        stage('Deploy to Local Docker') {
             steps {
                 echo 'Deploying....'
                 bat 'docker info'
@@ -44,14 +52,14 @@ pipeline {
 			    bat 'docker images'
             }
         }
-        stage('Building our image') { 
+        stage('Docker Pipeline - Build Image') { 
 		steps { 
                 script { 
                     dockerImage = docker.build registry + ":${VERSION}" 
                 }
             } 
         }
-        stage('Deploy our image') { 
+        stage('Docker Pipeline - Push Image') { 
             steps { 
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
