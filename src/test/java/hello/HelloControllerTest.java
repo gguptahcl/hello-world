@@ -19,7 +19,7 @@ public class HelloControllerTest {
 
     @Autowired
     private MockMvc mvc;
-/*
+
     @Test
     public void getHello() throws Exception {
     	System.out.println("inside test case *******************" );
@@ -27,7 +27,7 @@ public class HelloControllerTest {
                 .andExpect(status().isOk());
 
     }
-    */
+
     
     
 }
