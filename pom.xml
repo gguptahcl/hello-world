@@ -22,6 +22,22 @@
         <java.version>1.8</java.version>
     </properties>
  -->	
+ 
+ 	<properties>
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
+		<jacoco.utReportFolder>${project.basedir}/target/jacoco/test</jacoco.utReportFolder>
+		<sonar.coverage.jacoco.xmlReportPaths>${jacoco.utReportFolder}/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<jacoco.utReportFile>${jacoco.utReportFolder}/report/jacoco.xml</jacoco.utReportFile>
+
+		<project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
+		<sonar-maven-plugin.version>3.6.1.1688</sonar-maven-plugin.version>
+		<junit.utReportFolder>${project.testresult.directory}/test</junit.utReportFolder>
+		<maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
+		<argLine>-Djava.security.egd=file:/dev/./urandom -Xmx256m</argLine>
+		<lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
+	</properties>
+ 
     <build>
         <plugins>
             <plugin>
@@ -85,6 +101,50 @@
         <useSystemClassLoader>false</useSystemClassLoader>
     </configuration>
 </plugin>
+
+<!--  added for JACOCO Start -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>com/abc/batchIntegration/vo/*</exclude>
+						<exclude>com/abc/batchIntegration/domain/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>pre-unit-tests</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<!-- Sets the path to the file which contains the execution data. -->
+							<destFile>${jacoco.utReportFile}</destFile>
+						</configuration>
+					</execution>
+					<!-- Ensures that the code coverage report for unit tests is created
+                        after unit tests have been run -->
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<dataFile>${jacoco.utReportFile}</dataFile>
+							<outputEncoding>UTF-8</outputEncoding>
+							<outputDirectory>${jacoco.utReportFolder}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+<!--  added for JACOCO end -->
+
+
+
 
         </plugins>
     </build>
