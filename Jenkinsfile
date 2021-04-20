@@ -24,7 +24,7 @@ pipeline {
         stage('Build') {
             steps {
             	echo 'test 1....'
-                bat 'mvn package Dmaven.test.skip=true '
+                bat 'mvn package -DskipTests=true'
                 echo 'test 2....'
                 bat 'mvn checkstyle:checkstyle'
                 recordIssues(tools: [checkStyle(reportEncoding: 'UTF-8')])
